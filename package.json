@@ -1,0 +1,23 @@
+{
+  "name": "hr-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon ./src/main.js",
+    "start": "node ./src/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "mongoose": "^8.3.2",
+    "telegraf": "^4.15.3",
+    "telegraf-session-local": "^2.1.1"
+  }
+}

@@ -1,0 +1,5 @@
+.env
+node_modules
+nodemon.json
+session_db.json
+package-lock.json
