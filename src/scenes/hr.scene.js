@@ -9,6 +9,9 @@ const HRScene = new BaseScene('HRScene');
 
 HRScene.enter(async (ctx) => {
     ctx.session.step = 1;
+    const videoId = 'BAACAgIAAxkBAAI3hWYqS-iIKU3p2Rc-eNF3Ji8hda5vAALvRgACWHhZSYWq7RUnDUXmNAQ'
+    const caption = ruMessage.message.hello_hr
+    await ctx.telegram.sendVideo(ctx.from.id, videoId,  { caption });
     await ctx.reply(ruMessage.message.name, back());
 });
 

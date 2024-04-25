@@ -36,7 +36,7 @@ testTaskScene.on('document', async (ctx) => {
         'Опыт арбитража: ' + user.arbitrageExperience + '\n' +
         'Часы работы: ' + user.workTime + '\n' +
         'Телефон: ' + user.phone;
-        'Город: ' + user.location;
+        'Локация: ' + user.location;
 
 
     if (user !== null) {
