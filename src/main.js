@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 const ruMessage = require('./lang/ru.json');
-const connectToMongo = require('./models/db');
 const LocalSession = require('telegraf-session-local');
 
 const botToken = process.env.TELEGRAM_BOT_TOKEN;
@@ -13,7 +12,6 @@ if (!botToken) {
   process.exit(1);
 }
 
-connectToMongo();
 const bot = new Telegraf(botToken);
 
 const { Stage } = Scenes;
@@ -47,14 +45,7 @@ commandsFiles.forEach(file => {
   }
 });
 
-// Регистрация обработчиков
-const handlersPath = path.join(__dirname, 'handlers');
-fs.readdirSync(handlersPath).forEach(file => {
-  if (file.endsWith('.js')) {
-    const { handler } = require(`./handlers/${file}`);
-    handler(bot);
-  }
-});
+
 
 // Запуск бота
 bot.launch();
