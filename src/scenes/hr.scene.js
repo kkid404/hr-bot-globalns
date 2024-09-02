@@ -9,9 +9,6 @@ const HRScene = new BaseScene('HRScene');
 
 HRScene.enter(async (ctx) => {
     ctx.session.step = 1;
-    const videoId = 'BAACAgIAAxkBAAI3hWYqS-iIKU3p2Rc-eNF3Ji8hda5vAALvRgACWHhZSYWq7RUnDUXmNAQ'
-    const caption = ruMessage.message.hello_hr
-    await ctx.telegram.sendVideo(ctx.from.id, videoId,  { caption });
     await ctx.reply(ruMessage.message.name, back());
 });
 
@@ -48,7 +45,9 @@ HRScene.on('text', async (ctx) => {
             break;
         case 6:
             ctx.session.arbitrageExperience = ctx.message.text;
-            await ctx.sendMessage(ruMessage.message.phone, back());
+            await ctx.sendMessage(ruMessage.message.watchVideo, back());
+            await ctx.sendMessage(ruMessage.message.exampleWork);
+            await ctx.sendMessage(ruMessage.message.contact, back());
             break;
         case 7:
             try{
@@ -67,8 +66,20 @@ HRScene.on('text', async (ctx) => {
                         arbitrageExperience: ctx.session.arbitrageExperience || '',
                         location: ctx.session.location || '',
                     })
+                    await ctx.sendMessage(ruMessage.message.thanks, start())
 
-                    await ctx.sendMessage(ruMessage.message.testTask, start())
+                    const caption = 
+                    'Имя: ' + ctx.session.name + '\n' +
+                    'Юзернейм: ' + `@${ctx.from.username}` + '\n' +
+                    'Возраст: ' + ctx.session.age + '\n' +
+                    'Место проживания: ' + ctx.session.location + '\n' +
+                    'Опыт работы ' + ctx.session.experience + '\n' +
+                    'Рабочие часы: ' + ctx.session.workTime + '\n' +
+                    'Контактная информация: ' + ctx.session.phone;
+                    
+                    await ctx.telegram.sendMessage(process.env.CHANNEL_ID, caption)
+
+
                 } else {
                     await ctx.sendMessage('Вы уже оставляли заявку.', start())
                     ctx.scene.leave();

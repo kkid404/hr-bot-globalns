@@ -6,7 +6,7 @@ require('dotenv').config();
 function connectToMongo() {
   // Получение настроек подключения из переменных окружения или использование значений по умолчанию
   const login = process.env.LOGIN
-  const password = process.env.PASSWORD
+  const password = encodeURIComponent(process.env.PASSWORD)
   const host = process.env.HOST_DB || 'localhost'; // Хост базы данных, по умолчанию 'localhost'
   const port = process.env.PORT_DB || 27017;       // Порт, на котором работает MongoDB, по умолчанию 27017
   const data = process.env.DATABASE || 'mydatabase'; // Имя базы данных, по умолчанию 'mydatabase'
@@ -16,8 +16,6 @@ function connectToMongo() {
 
   // Подключение к MongoDB с использованием строки подключения и настроек
   mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     directConnection: true
   }).then(() => {
     // Логирование успешного подключения

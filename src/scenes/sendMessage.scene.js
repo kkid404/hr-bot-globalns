@@ -3,6 +3,7 @@ const { BaseScene } = Scenes;
 const ruMessage = require('../lang/ru.json');
 const { back } = require('../keyboards/back.keyboard');
 const { start } = require('../keyboards/start.keyboard');
+const userService = require('../services/user.service');
 
 const sendMessageScene = new BaseScene('sendMessageScene');
 
@@ -29,7 +30,9 @@ sendMessageScene.on('text', async (ctx) => {
         case 2:
             ctx.session.message = ctx.message.text;
             try{
-                await ctx.telegram.sendMessage(ctx.session.id, ctx.session.message)
+                const user = await userService.getByUsernameUser(ctx.session.id)
+                const userId = user.tg_id
+                await ctx.telegram.sendMessage(userId, ctx.session.message)
                 await ctx.reply(ruMessage.message.messages_succes, start())
             } catch (error) {
                 console.log(error)
