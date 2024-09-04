@@ -33,11 +33,15 @@ HRScene.on('text', async (ctx) => {
             break;
         case 5:
             ctx.session.workTime = ctx.message.text;
+            await ctx.reply(ruMessage.message.exampleWorkUser);
+            break;
+        case 6:
+            ctx.session.exampleWorkUser = ctx.message.text;
             await ctx.sendMessage(ruMessage.message.watchVideo);
             await ctx.sendMessage(ruMessage.message.exampleWork);
             await ctx.sendMessage(ruMessage.message.contact);
             break;
-        case 6:
+        case 7:
             try{
                 ctx.session.phone = ctx.message.text;
 
@@ -47,7 +51,8 @@ HRScene.on('text', async (ctx) => {
                 'Имя: ' + ctx.session.name + '\n' +
                 'Возраст: ' + ctx.session.age + '\n' +
                 'Место проживания: ' + ctx.session.location + '\n' +
-                'Опыт работы ' + ctx.session.experience + '\n' +
+                'Опыт работы: ' + ctx.session.experience + '\n' +
+                'Примеры работ: ' + ctx.session.exampleWorkUser + '\n' +
                 'Рабочие часы: ' + ctx.session.workTime + '\n' +
                 'Контактная информация: ' + ctx.session.phone;
 
